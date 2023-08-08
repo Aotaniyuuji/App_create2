@@ -6,11 +6,11 @@ describe '投稿のテスト' do
   let! visit root_path
   describe 'トップ画面(top_path)のテスト' do
     before 'トップ画面への遷移' do
-      visit root_path
+      visit top_path
     end
     context '表示の確認' do
       it 'トップ画面(top_path)に「ここはTopページです」が表示されているか' do
-        expect(page).to heve_content('ここはトップページです')
+        expect(page).to heve_content('ここはtopページです')
       end
       it 'top_pathが"/top"であるか' do
         expect(current_path).to eq '/top'
