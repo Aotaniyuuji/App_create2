@@ -43,7 +43,33 @@ describe '投稿画面のテスト' do
     end
     context '一覧画面の表示とリンクの確認' do
       it '一覧表示画面に投稿されたものが表示されているか' do
-        expect(page).to have_content 
+        expect(page).to have_content list.title
+        expect(page).to have_link list.title
+      end
+    end
+  end
+
+  describe '詳細画面のテスト' do
+    before '詳細画面への確認' do
+      visit show_path
+    end
+    context '表示の確認' do
+      it '削除リンクが存在しているか' do
+        expect(page).to have_link '削除リンク'
+      end
+      it '編集リンクが存在しているか' do
+        expect(page).to have_link '編集リンク'
+      end
+    end
+    context 'リンクの遷移先の確認' do
+      it '編集の遷移先は編集画面か' do
+        edit_link = find_all()
+        expect(edit_link.native.inner_text).to include('/edit')
+      end
+    end
+    context 'list削除のテスト' do
+      it 'listの削除' do
+        expect { list.destroy }.to change{ Book.count }.by(-1)
       end
     end
   end
