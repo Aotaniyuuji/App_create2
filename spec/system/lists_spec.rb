@@ -33,6 +33,9 @@ describe '投稿画面のテスト' do
   end
   context '投稿処理のテスト' do
     it '投稿後のリダイレクト先は正しいか' do
+      fill_in 'list[title]', with: Faker::Lorem.characters(number:10)
+      fill_in 'list[body]', with: Faker::Lorem.characters(number:30)
+      click_button 'Create List'
       expect(page).to have_current_path list_path(List.last)
     end
   end
@@ -70,6 +73,28 @@ describe '投稿画面のテスト' do
     context 'list削除のテスト' do
       it 'listの削除' do
         expect { list.destroy }.to change{ Book.count }.by(-1)
+      end
+    end
+  end
+
+  dexcribe '編集画面のテスト' do
+    before '編集画面への遷移' do
+      visit edit_path
+    end
+    context '表示の確認' do
+      it '編集前のタイトルと本文がフォームに表示(セット)されている' do
+        expect()
+      end
+      it '保存ボタンが表示される' do
+        expect(page).to have_button '保存'
+      end
+    end
+    context '更新処理に関するテスト' do
+      it '更新後のリダイレクト先は正しいか' do
+        fill_in 'list[title]', with: Faker::Lorem.characters(number:10)
+        fill_in 'list[body]', with: Faker::Lorem.characters(number:30)
+        click_button 'Update List'
+        expect(page).to have_current_path list_path(list)
       end
     end
   end
