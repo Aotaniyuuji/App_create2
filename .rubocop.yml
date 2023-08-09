@@ -1,5 +1,3 @@
-inherit_from: .rubocop_todo.yml
-
 require:
   - rubocop-minitest
   - rubocop-packaging
@@ -23,14 +21,14 @@ AllCops:
 
 Performance:
   Exclude:
-  - '**/test/**/*'
+    - '**/test/**/*'
 
 # Prefer assert_not over assert !
 Rails/AssertNot:
   Include:
-    = '**/test/**/*'
+    - '**/test/**/*'
 
-#Prefer assert_not_x over refute_x
+# Prefer assert_not_x over refute_x
 Rails/RefuteMethods:
   Include:
     - '**/test/**/*'
